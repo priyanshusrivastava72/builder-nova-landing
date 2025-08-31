@@ -17,7 +17,9 @@ export type TfIdfIndex = {
 
 export function buildIndex(docs: CaseDoc[]): TfIdfIndex {
   const vocab = new Map<string, number>();
-  const docTokens: string[][] = docs.map((d) => tokenize(`${d.title} ${d.summary} ${d.fullText} ${d.tags.join(" ")}`));
+  const docTokens: string[][] = docs.map((d) =>
+    tokenize(`${d.title} ${d.summary} ${d.fullText} ${d.tags.join(" ")}`),
+  );
 
   // Build vocab
   for (const tokens of docTokens) {
@@ -39,13 +41,18 @@ export function buildIndex(docs: CaseDoc[]): TfIdfIndex {
   }
   const N = docs.length;
   const idf = new Float64Array(vocab.size);
-  for (let i = 0; i < vocab.size; i++) idf[i] = Math.log((N + 1) / (df[i] + 1)) + 1; // smoothed IDF
+  for (let i = 0; i < vocab.size; i++)
+    idf[i] = Math.log((N + 1) / (df[i] + 1)) + 1; // smoothed IDF
 
   const docVectors = docTokens.map((tokens) => tfidf(tokens, vocab, idf));
   return { vocab, idf, docs, docVectors };
 }
 
-function tfidf(tokens: string[], vocab: Map<string, number>, idf: Float64Array): Float64Array {
+function tfidf(
+  tokens: string[],
+  vocab: Map<string, number>,
+  idf: Float64Array,
+): Float64Array {
   const tf = new Map<number, number>();
   for (const t of tokens) {
     const id = vocab.get(t);
@@ -73,7 +80,11 @@ function cosine(a: Float64Array, b: Float64Array): number {
 
 export type SearchResult = { doc: CaseDoc; score: number };
 
-export function search(index: TfIdfIndex, query: string, k = 5): SearchResult[] {
+export function search(
+  index: TfIdfIndex,
+  query: string,
+  k = 5,
+): SearchResult[] {
   const qv = tfidf(tokenize(query), index.vocab, index.idf);
   const scores = index.docVectors.map((dv) => cosine(qv, dv));
   const results = index.docs

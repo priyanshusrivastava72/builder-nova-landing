@@ -24,13 +24,32 @@ export default function Layout({ children }: PropsWithChildren) {
             <span className="text-xl font-bold text-legal-800">LegalAI</span>
           </Link>
           <nav className="hidden md:flex space-x-6">
-            <button onClick={() => scrollTo("#features")} className="text-muted-foreground hover:text-legal-700 transition-colors">Features</button>
-            <button onClick={() => scrollTo("#about")} className="text-muted-foreground hover:text-legal-700 transition-colors">About</button>
-            <button onClick={() => scrollTo("#contact")} className="text-muted-foreground hover:text-legal-700 transition-colors">Contact</button>
+            <button
+              onClick={() => scrollTo("#features")}
+              className="text-muted-foreground hover:text-legal-700 transition-colors"
+            >
+              Features
+            </button>
+            <button
+              onClick={() => scrollTo("#about")}
+              className="text-muted-foreground hover:text-legal-700 transition-colors"
+            >
+              About
+            </button>
+            <button
+              onClick={() => scrollTo("#contact")}
+              className="text-muted-foreground hover:text-legal-700 transition-colors"
+            >
+              Contact
+            </button>
           </nav>
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" className="text-legal-700">Sign In</Button>
-            <Button className="bg-legal-700 hover:bg-legal-800">Get Started</Button>
+            <Button variant="ghost" className="text-legal-700">
+              Sign In
+            </Button>
+            <Button className="bg-legal-700 hover:bg-legal-800">
+              Get Started
+            </Button>
           </div>
         </div>
       </header>
@@ -48,35 +67,127 @@ export default function Layout({ children }: PropsWithChildren) {
                 <span className="text-xl font-bold text-white">LegalAI</span>
               </div>
               <p className="text-legal-300">
-                Empowering legal professionals with cutting-edge AI technology for a more efficient practice.
+                Empowering legal professionals with cutting-edge AI technology
+                for a more efficient practice.
               </p>
             </div>
             <div>
               <h3 className="font-semibold text-white mb-4">Product</h3>
               <ul className="space-y-2">
-                <li><Link to="/summarizer" className="hover:text-white transition-colors">Legal Summarizer</Link></li>
-                <li><Link to="/case-finder" className="hover:text-white transition-colors">Case Finder</Link></li>
-                <li><Link to="/outcome-predictor" className="hover:text-white transition-colors">Outcome Predictor</Link></li>
-                <li><Link to="/legal-assistant" className="hover:text-white transition-colors">Legal Assistant</Link></li>
-                <li><Link to="/contract-analyzer" className="hover:text-white transition-colors">Contract Analyzer</Link></li>
+                <li>
+                  <Link
+                    to="/summarizer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Legal Summarizer
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/case-finder"
+                    className="hover:text-white transition-colors"
+                  >
+                    Case Finder
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/outcome-predictor"
+                    className="hover:text-white transition-colors"
+                  >
+                    Outcome Predictor
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/legal-assistant"
+                    className="hover:text-white transition-colors"
+                  >
+                    Legal Assistant
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contract-analyzer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Contract Analyzer
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold text-white mb-4">Company</h3>
               <ul className="space-y-2">
-                <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
-                <li><Link to="/careers" className="hover:text-white transition-colors">Careers</Link></li>
-                <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-                <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link></li>
+                <li>
+                  <Link
+                    to="/about"
+                    className="hover:text-white transition-colors"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/careers"
+                    className="hover:text-white transition-colors"
+                  >
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    className="hover:text-white transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/privacy"
+                    className="hover:text-white transition-colors"
+                  >
+                    Privacy
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold text-white mb-4">Support</h3>
               <ul className="space-y-2">
-                <li><Link to="/help" className="hover:text-white transition-colors">Help Center</Link></li>
-                <li><Link to="/docs" className="hover:text-white transition-colors">Documentation</Link></li>
-                <li><Link to="/api" className="hover:text-white transition-colors">API Reference</Link></li>
-                <li><Link to="/status" className="hover:text-white transition-colors">System Status</Link></li>
+                <li>
+                  <Link
+                    to="/help"
+                    className="hover:text-white transition-colors"
+                  >
+                    Help Center
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/docs"
+                    className="hover:text-white transition-colors"
+                  >
+                    Documentation
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/api"
+                    className="hover:text-white transition-colors"
+                  >
+                    API Reference
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/status"
+                    className="hover:text-white transition-colors"
+                  >
+                    System Status
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

@@ -1,10 +1,24 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Scale, Upload, FileText, Zap, Clock, CheckCircle, ArrowRight } from "lucide-react";
+import {
+  Scale,
+  Upload,
+  FileText,
+  Zap,
+  Clock,
+  CheckCircle,
+  ArrowRight,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -33,7 +47,6 @@ export default function LegalSummarizer() {
 
   return (
     <Layout>
-
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Hero Section */}
         <div className="text-center mb-12">
@@ -46,7 +59,8 @@ export default function LegalSummarizer() {
             Legal Summarizer
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
-            Transform lengthy court judgments into concise, actionable briefs in seconds using advanced AI technology
+            Transform lengthy court judgments into concise, actionable briefs in
+            seconds using advanced AI technology
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-200">
@@ -83,7 +97,9 @@ export default function LegalSummarizer() {
                   <Label htmlFor="file">Document Upload</Label>
                   <div
                     className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-                      dragActive ? 'border-blue-500 bg-blue-50' : 'border-legal-200 hover:border-legal-300'
+                      dragActive
+                        ? "border-blue-500 bg-blue-50"
+                        : "border-legal-200 hover:border-legal-300"
                     }`}
                     onDragEnter={handleDrag}
                     onDragLeave={handleDrag}
@@ -106,7 +122,7 @@ export default function LegalSummarizer() {
                       type="button"
                       variant="outline"
                       className="mt-4"
-                      onClick={() => document.getElementById('file')?.click()}
+                      onClick={() => document.getElementById("file")?.click()}
                     >
                       Choose File
                     </Button>
@@ -125,7 +141,9 @@ export default function LegalSummarizer() {
 
                 {/* Settings */}
                 <div className="space-y-4 p-4 bg-legal-50 rounded-lg">
-                  <h3 className="font-medium text-legal-900">Summary Options</h3>
+                  <h3 className="font-medium text-legal-900">
+                    Summary Options
+                  </h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="length">Summary Length</Label>
@@ -134,8 +152,12 @@ export default function LegalSummarizer() {
                         className="w-full px-3 py-2 border border-legal-200 rounded-md focus:outline-none focus:ring-2 focus:ring-legal-500"
                       >
                         <option value="brief">Brief (1-2 paragraphs)</option>
-                        <option value="standard">Standard (3-5 paragraphs)</option>
-                        <option value="detailed">Detailed (5+ paragraphs)</option>
+                        <option value="standard">
+                          Standard (3-5 paragraphs)
+                        </option>
+                        <option value="detailed">
+                          Detailed (5+ paragraphs)
+                        </option>
                       </select>
                     </div>
                     <div className="space-y-2">
@@ -204,7 +226,9 @@ export default function LegalSummarizer() {
                 <div className="text-center py-12 text-muted-foreground">
                   <FileText className="mx-auto h-12 w-12 mb-4" />
                   <p>Upload a document or paste text to generate a summary</p>
-                  <p className="text-sm mt-2">Your AI-powered legal brief will appear here</p>
+                  <p className="text-sm mt-2">
+                    Your AI-powered legal brief will appear here
+                  </p>
                 </div>
               )}
             </CardContent>
@@ -222,8 +246,12 @@ export default function LegalSummarizer() {
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white mx-auto mb-4">
                   <Zap className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-legal-900 mb-2">Lightning Fast</h3>
-                <p className="text-muted-foreground">Generate comprehensive summaries in under 30 seconds</p>
+                <h3 className="font-semibold text-legal-900 mb-2">
+                  Lightning Fast
+                </h3>
+                <p className="text-muted-foreground">
+                  Generate comprehensive summaries in under 30 seconds
+                </p>
               </CardContent>
             </Card>
             <Card className="text-center border-0 shadow-md">
@@ -231,8 +259,12 @@ export default function LegalSummarizer() {
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white mx-auto mb-4">
                   <CheckCircle className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-legal-900 mb-2">Highly Accurate</h3>
-                <p className="text-muted-foreground">98% accuracy rate verified by legal professionals</p>
+                <h3 className="font-semibold text-legal-900 mb-2">
+                  Highly Accurate
+                </h3>
+                <p className="text-muted-foreground">
+                  98% accuracy rate verified by legal professionals
+                </p>
               </CardContent>
             </Card>
             <Card className="text-center border-0 shadow-md">
@@ -240,14 +272,17 @@ export default function LegalSummarizer() {
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center text-white mx-auto mb-4">
                   <Clock className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-legal-900 mb-2">Time Saving</h3>
-                <p className="text-muted-foreground">Reduce document review time by up to 90%</p>
+                <h3 className="font-semibold text-legal-900 mb-2">
+                  Time Saving
+                </h3>
+                <p className="text-muted-foreground">
+                  Reduce document review time by up to 90%
+                </p>
               </CardContent>
             </Card>
           </div>
         </div>
       </div>
-
     </Layout>
   );
 }
