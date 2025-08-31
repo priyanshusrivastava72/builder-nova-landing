@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Scale, Search, TrendingUp, MessageSquare, Shield, Sparkles, Users, Award, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import Layout from "@/components/Layout";
+
 export default function Index() {
   const features = [
     {
@@ -66,27 +68,7 @@ export default function Index() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-legal-50/30 to-gold-50/20">
-      {/* Header */}
-      <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 bg-gradient-to-br from-legal-600 to-legal-700 rounded-lg flex items-center justify-center">
-              <Scale className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-legal-800">LegalAI</span>
-          </div>
-          <nav className="hidden md:flex space-x-6">
-            <a href="#features" className="text-muted-foreground hover:text-legal-700 transition-colors">Features</a>
-            <a href="#about" className="text-muted-foreground hover:text-legal-700 transition-colors">About</a>
-            <a href="#contact" className="text-muted-foreground hover:text-legal-700 transition-colors">Contact</a>
-          </nav>
-          <div className="flex items-center space-x-2">
-            <Button variant="ghost" className="text-legal-700">Sign In</Button>
-            <Button className="bg-legal-700 hover:bg-legal-800">Get Started</Button>
-          </div>
-        </div>
-      </header>
+    <Layout>
 
       {/* Hero Section */}
       <section className="py-20 px-4">
@@ -230,59 +212,6 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-legal-950 text-legal-200 py-12 px-4">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 bg-gradient-to-br from-legal-600 to-legal-700 rounded-lg flex items-center justify-center">
-                  <Scale className="h-5 w-5 text-white" />
-                </div>
-                <span className="text-xl font-bold text-white">LegalAI</span>
-              </div>
-              <p className="text-legal-300">
-                Empowering legal professionals with cutting-edge AI technology for a more efficient practice.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-white mb-4">Product</h3>
-              <ul className="space-y-2">
-                <li><a href="/summarizer" className="hover:text-white transition-colors">Legal Summarizer</a></li>
-                <li><a href="/case-finder" className="hover:text-white transition-colors">Case Finder</a></li>
-                <li><a href="/outcome-predictor" className="hover:text-white transition-colors">Outcome Predictor</a></li>
-                <li><a href="/legal-assistant" className="hover:text-white transition-colors">Legal Assistant</a></li>
-                <li><a href="/contract-analyzer" className="hover:text-white transition-colors">Contract Analyzer</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-white mb-4">Company</h3>
-              <ul className="space-y-2">
-                <li><a href="/about" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="/careers" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="/privacy" className="hover:text-white transition-colors">Privacy</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-white mb-4">Support</h3>
-              <ul className="space-y-2">
-                <li><a href="/help" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="/docs" className="hover:text-white transition-colors">Documentation</a></li>
-                <li><a href="/api" className="hover:text-white transition-colors">API Reference</a></li>
-                <li><a href="/status" className="hover:text-white transition-colors">System Status</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-legal-800 mt-8 pt-8 text-center">
-            <p>&copy; 2024 LegalAI. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }
