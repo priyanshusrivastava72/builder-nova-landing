@@ -9,6 +9,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LegalSummarizer from "./pages/LegalSummarizer";
+import CaseFinder from "./pages/CaseFinder";
+import OutcomePredictor from "./pages/OutcomePredictor";
+import LegalAssistant from "./pages/LegalAssistant";
+import ContractAnalyzer from "./pages/ContractAnalyzer";
 
 const queryClient = new QueryClient();
 
@@ -21,10 +25,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/summarizer" element={<LegalSummarizer />} />
-          <Route path="/case-finder" element={<NotFound />} />
-          <Route path="/outcome-predictor" element={<NotFound />} />
-          <Route path="/legal-assistant" element={<NotFound />} />
-          <Route path="/contract-analyzer" element={<NotFound />} />
+          <Route path="/case-finder" element={<CaseFinder />} />
+          <Route path="/outcome-predictor" element={<OutcomePredictor />} />
+          <Route path="/legal-assistant" element={<LegalAssistant />} />
+          <Route path="/contract-analyzer" element={<ContractAnalyzer />} />
           <Route path="/about" element={<NotFound />} />
           <Route path="/contact" element={<NotFound />} />
           <Route path="/careers" element={<NotFound />} />
