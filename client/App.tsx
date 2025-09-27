@@ -13,6 +13,8 @@ import CaseFinder from "./pages/CaseFinder";
 import OutcomePredictor from "./pages/OutcomePredictor";
 import LegalAssistant from "./pages/LegalAssistant";
 import ContractAnalyzer from "./pages/ContractAnalyzer";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -29,8 +31,8 @@ const App = () => (
           <Route path="/outcome-predictor" element={<OutcomePredictor />} />
           <Route path="/legal-assistant" element={<LegalAssistant />} />
           <Route path="/contract-analyzer" element={<ContractAnalyzer />} />
-          <Route path="/about" element={<NotFound />} />
-          <Route path="/contact" element={<NotFound />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<NotFound />} />
           <Route path="/privacy" element={<NotFound />} />
           <Route path="/help" element={<NotFound />} />

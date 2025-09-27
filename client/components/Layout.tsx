@@ -24,32 +24,17 @@ export default function Layout({ children }: PropsWithChildren) {
             <span className="text-xl font-bold text-legal-800">LegalAI</span>
           </Link>
           <nav className="hidden md:flex space-x-6">
-            <button
-              onClick={() => scrollTo("#features")}
-              className="text-muted-foreground hover:text-legal-700 transition-colors"
-            >
-              Features
-            </button>
-            <button
-              onClick={() => scrollTo("#about")}
-              className="text-muted-foreground hover:text-legal-700 transition-colors"
-            >
-              About
-            </button>
-            <button
-              onClick={() => scrollTo("#contact")}
-              className="text-muted-foreground hover:text-legal-700 transition-colors"
-            >
-              Contact
-            </button>
+            <Link to="/#features" className="text-muted-foreground hover:text-legal-700 transition-colors">Features</Link>
+            <Link to="/about" className="text-muted-foreground hover:text-legal-700 transition-colors">About</Link>
+            <Link to="/contact" className="text-muted-foreground hover:text-legal-700 transition-colors">Contact</Link>
           </nav>
           <div className="flex items-center space-x-2">
-            <a href="/#contact">
+            <Link to="/contact">
               <Button variant="ghost" className="text-legal-700">Sign In</Button>
-            </a>
-            <a href="/#contact">
+            </Link>
+            <Link to="/contact">
               <Button className="bg-legal-700 hover:bg-legal-800">Get Started</Button>
-            </a>
+            </Link>
           </div>
         </div>
       </header>
@@ -121,7 +106,7 @@ export default function Layout({ children }: PropsWithChildren) {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    to="/#about"
+                    to="/about"
                     className="hover:text-white transition-colors"
                   >
                     About
@@ -137,7 +122,7 @@ export default function Layout({ children }: PropsWithChildren) {
                 </li>
                 <li>
                   <Link
-                    to="/#contact"
+                    to="/contact"
                     className="hover:text-white transition-colors"
                   >
                     Contact
