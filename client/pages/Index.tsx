@@ -248,7 +248,7 @@ export default function Index() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-4 bg-white/60 backdrop-blur">
+      <section id="about" className="hidden py-20 px-4 bg-white/60 backdrop-blur">
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-3 gap-8 items-start">
             <div>
@@ -279,7 +279,7 @@ export default function Index() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4">
+      <section id="contact" className="hidden py-20 px-4">
         <div className="container mx-auto max-w-5xl">
           <div className="grid lg:grid-cols-2 gap-8">
             <Card className="border-0 shadow-lg">
