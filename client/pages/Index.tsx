@@ -22,8 +22,20 @@ import {
 import { Link } from "react-router-dom";
 
 import Layout from "@/components/Layout";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Index() {
+  const { toast } = useToast();
+  const onContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get('name') || '');
+    toast({ title: name ? `Thanks, ${name}` : 'Thanks!', description: 'Your message has been received. We\'ll be in touch shortly.' });
+    e.currentTarget.reset();
+  };
   const features = [
     {
       icon: <Scale className="h-8 w-8" />,
@@ -112,20 +124,17 @@ export default function Index() {
             modern legal professionals need.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-legal-700 hover:bg-legal-800 text-lg px-8"
-            >
-              Start Free Trial
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-lg px-8 border-legal-200 hover:bg-legal-50"
-            >
-              Watch Demo
-            </Button>
+            <a href="#contact">
+              <Button size="lg" className="bg-legal-700 hover:bg-legal-800 text-lg px-8">
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </a>
+            <a href="#contact">
+              <Button size="lg" variant="outline" className="text-lg px-8 border-legal-200 hover:bg-legal-50">
+                Sign In
+              </Button>
+            </a>
           </div>
         </div>
       </section>
@@ -162,10 +171,10 @@ export default function Index() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {features.map((feature, index) => (
               <Link key={index} to={feature.href}>
-                <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-md group">
+                <Card className="relative h-full rounded-2xl border border-legal-200/60 bg-white/60 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                   <CardHeader className="pb-4">
                     <div
-                      className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}
+                      className={`w-16 h-16 rounded-xl ring-4 ring-white/60 bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}
                     >
                       {feature.icon}
                     </div>
@@ -238,6 +247,90 @@ export default function Index() {
         </div>
       </section>
 
+      {/* About Section */}
+      <section id="about" className="py-20 px-4 bg-white/60 backdrop-blur">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid lg:grid-cols-3 gap-8 items-start">
+            <div>
+              <h2 className="text-4xl font-bold text-legal-900 mb-4">About LegalAI</h2>
+              <p className="text-lg text-muted-foreground">We build AI-first tools that elevate legal practice. Our mission is to make research, drafting, and decision-making faster, more accurate, and more accessible.</p>
+              <div className="mt-6 space-y-2 text-legal-800">
+                <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-legal-700"/> Privacy-first design</div>
+                <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-legal-700"/> Interpretable AI outputs</div>
+                <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-legal-700"/> Built with legal experts</div>
+              </div>
+            </div>
+            <div className="lg:col-span-2 grid md:grid-cols-3 gap-4">
+              <div className="p-6 rounded-2xl border border-legal-200 bg-white/70 shadow-sm">
+                <div className="text-3xl font-bold text-legal-900">50K+</div>
+                <div className="text-muted-foreground">Cases analyzed</div>
+              </div>
+              <div className="p-6 rounded-2xl border border-legal-200 bg-white/70 shadow-sm">
+                <div className="text-3xl font-bold text-legal-900">98%</div>
+                <div className="text-muted-foreground">Accuracy rate</div>
+              </div>
+              <div className="p-6 rounded-2xl border border-legal-200 bg-white/70 shadow-sm">
+                <div className="text-3xl font-bold text-legal-900">24/7</div>
+                <div className="text-muted-foreground">AI assistance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <Card className="border-0 shadow-lg">
+              <CardHeader>
+                <CardTitle className="text-legal-900">Get in touch</CardTitle>
+                <CardDescription>We\'ll respond within 1 business day</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={onContactSubmit} className="space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="name">Full name</Label>
+                      <Input id="name" name="name" required placeholder="Jane Doe" />
+                    </div>
+                    <div>
+                      <Label htmlFor="email">Email</Label>
+                      <Input id="email" name="email" type="email" required placeholder="jane@firm.com" />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="org">Firm / Company</Label>
+                    <Input id="org" name="org" placeholder="Acme Legal" />
+                  </div>
+                  <div>
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea id="message" name="message" required placeholder="Tell us about your needs..." className="min-h-[140px]" />
+                  </div>
+                  <div className="flex gap-3">
+                    <Button type="submit" className="bg-legal-700 hover:bg-legal-800">Send message</Button>
+                    <a href="#features"><Button type="button" variant="outline">Explore features</Button></a>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+            <div className="p-8 rounded-2xl border border-legal-200 bg-white/70 shadow-sm">
+              <h3 className="text-xl font-semibold text-legal-900">Why choose us</h3>
+              <ul className="mt-4 space-y-3 text-legal-800">
+                <li>• Enterprise-grade security</li>
+                <li>• On-prem or cloud options</li>
+                <li>• SOC 2 and GDPR aligned processes</li>
+                <li>• White-glove onboarding and support</li>
+              </ul>
+              <div className="mt-6">
+                <div className="text-sm text-muted-foreground">Email</div>
+                <div className="font-medium">contact@legalai.app</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-legal-800 to-legal-900 text-white">
         <div className="container mx-auto text-center">
@@ -249,20 +342,17 @@ export default function Index() {
             work smarter, not harder.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-gold-500 hover:bg-gold-600 text-gold-900 font-semibold text-lg px-8"
-            >
-              Start Your Free Trial
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-lg px-8 border-legal-300 text-legal-100 hover:bg-legal-700"
-            >
-              Schedule a Demo
-            </Button>
+            <a href="#contact">
+              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-gold-900 font-semibold text-lg px-8">
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </a>
+            <a href="#contact">
+              <Button size="lg" variant="outline" className="text-lg px-8 border-legal-300 text-legal-100 hover:bg-legal-700">
+                Sign In
+              </Button>
+            </a>
           </div>
         </div>
       </section>
