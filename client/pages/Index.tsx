@@ -183,7 +183,7 @@ export default function Index() {
                       {feature.title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="text-center">
                     <CardDescription className="text-base leading-relaxed">
                       {feature.description}
                     </CardDescription>
@@ -288,7 +288,7 @@ export default function Index() {
                 <CardTitle className="text-legal-900">Get in touch</CardTitle>
                 <CardDescription>We\'ll respond within 1 business day</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="text-center">
                 <form onSubmit={onContactSubmit} className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
