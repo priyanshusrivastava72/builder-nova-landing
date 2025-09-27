@@ -44,12 +44,12 @@ export default function Layout({ children }: PropsWithChildren) {
             </button>
           </nav>
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" className="text-legal-700">
-              Sign In
-            </Button>
-            <Button className="bg-legal-700 hover:bg-legal-800">
-              Get Started
-            </Button>
+            <a href="/#contact">
+              <Button variant="ghost" className="text-legal-700">Sign In</Button>
+            </a>
+            <a href="/#contact">
+              <Button className="bg-legal-700 hover:bg-legal-800">Get Started</Button>
+            </a>
           </div>
         </div>
       </header>
@@ -121,7 +121,7 @@ export default function Layout({ children }: PropsWithChildren) {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    to="/about"
+                    to="/#about"
                     className="hover:text-white transition-colors"
                   >
                     About
@@ -137,7 +137,7 @@ export default function Layout({ children }: PropsWithChildren) {
                 </li>
                 <li>
                   <Link
-                    to="/contact"
+                    to="/#contact"
                     className="hover:text-white transition-colors"
                   >
                     Contact
