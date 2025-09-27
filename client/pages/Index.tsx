@@ -112,7 +112,7 @@ export default function Index() {
             <Sparkles className="w-3 h-3 mr-1" />
             Powered by Advanced AI
           </Badge>
-          <h1 className="text-5xl md:text-6xl font-bold text-legal-900 mb-6 leading-tight">
+          <h1 className="text-5xl md:text-6xl font-bold text-legal-900 mb-6 leading-[1.15] md:leading-[1.1]">
             The Future of
             <span className="block bg-gradient-to-r from-legal-600 to-gold-600 bg-clip-text text-transparent">
               Legal Intelligence
