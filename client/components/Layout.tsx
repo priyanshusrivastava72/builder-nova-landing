@@ -24,16 +24,35 @@ export default function Layout({ children }: PropsWithChildren) {
             <span className="text-xl font-bold text-legal-800">LegalAI</span>
           </Link>
           <nav className="hidden md:flex space-x-6">
-            <Link to="/#features" className="text-muted-foreground hover:text-legal-700 transition-colors">Features</Link>
-            <Link to="/about" className="text-muted-foreground hover:text-legal-700 transition-colors">About</Link>
-            <Link to="/contact" className="text-muted-foreground hover:text-legal-700 transition-colors">Contact</Link>
+            <Link
+              to="/#features"
+              className="text-muted-foreground hover:text-legal-700 transition-colors"
+            >
+              Features
+            </Link>
+            <Link
+              to="/about"
+              className="text-muted-foreground hover:text-legal-700 transition-colors"
+            >
+              About
+            </Link>
+            <Link
+              to="/contact"
+              className="text-muted-foreground hover:text-legal-700 transition-colors"
+            >
+              Contact
+            </Link>
           </nav>
           <div className="flex items-center space-x-2">
             <Link to="/contact">
-              <Button variant="ghost" className="text-legal-700">Sign In</Button>
+              <Button variant="ghost" className="text-legal-700">
+                Sign In
+              </Button>
             </Link>
             <Link to="/contact">
-              <Button className="bg-legal-700 hover:bg-legal-800">Get Started</Button>
+              <Button className="bg-legal-700 hover:bg-legal-800">
+                Get Started
+              </Button>
             </Link>
           </div>
         </div>

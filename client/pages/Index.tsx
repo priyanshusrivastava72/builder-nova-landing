@@ -32,8 +32,11 @@ export default function Index() {
   const onContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const name = String(data.get('name') || '');
-    toast({ title: name ? `Thanks, ${name}` : 'Thanks!', description: 'Your message has been received. We\'ll be in touch shortly.' });
+    const name = String(data.get("name") || "");
+    toast({
+      title: name ? `Thanks, ${name}` : "Thanks!",
+      description: "Your message has been received. We'll be in touch shortly.",
+    });
     e.currentTarget.reset();
   };
   const features = [
@@ -125,13 +128,20 @@ export default function Index() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/contact">
-              <Button size="lg" className="bg-legal-700 hover:bg-legal-800 text-lg px-8">
+              <Button
+                size="lg"
+                className="bg-legal-700 hover:bg-legal-800 text-lg px-8"
+              >
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </a>
             <a href="/contact">
-              <Button size="lg" variant="outline" className="text-lg px-8 border-legal-200 hover:bg-legal-50">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-lg px-8 border-legal-200 hover:bg-legal-50"
+              >
                 Sign In
               </Button>
             </a>
@@ -147,8 +157,12 @@ export default function Index() {
             <div className="relative grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
               {stats.map((stat, index) => (
                 <div key={index} className="p-8 md:p-10 text-center">
-                  <div className="text-4xl md:text-5xl font-bold text-gold-400">{stat.number}</div>
-                  <div className="mt-2 text-sm uppercase tracking-wide text-legal-200">{stat.label}</div>
+                  <div className="text-4xl md:text-5xl font-bold text-gold-400">
+                    {stat.number}
+                  </div>
+                  <div className="mt-2 text-sm uppercase tracking-wide text-legal-200">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
@@ -249,16 +263,34 @@ export default function Index() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="hidden py-20 px-4 bg-white/60 backdrop-blur">
+      <section
+        id="about"
+        className="hidden py-20 px-4 bg-white/60 backdrop-blur"
+      >
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-3 gap-8 items-start">
             <div>
-              <h2 className="text-4xl font-bold text-legal-900 mb-4">About LegalAI</h2>
-              <p className="text-lg text-muted-foreground">We build AI-first tools that elevate legal practice. Our mission is to make research, drafting, and decision-making faster, more accurate, and more accessible.</p>
+              <h2 className="text-4xl font-bold text-legal-900 mb-4">
+                About LegalAI
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                We build AI-first tools that elevate legal practice. Our mission
+                is to make research, drafting, and decision-making faster, more
+                accurate, and more accessible.
+              </p>
               <div className="mt-6 space-y-2 text-legal-800">
-                <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-legal-700"/> Privacy-first design</div>
-                <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-legal-700"/> Interpretable AI outputs</div>
-                <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-legal-700"/> Built with legal experts</div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-legal-700" />{" "}
+                  Privacy-first design
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-legal-700" />{" "}
+                  Interpretable AI outputs
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-legal-700" /> Built with
+                  legal experts
+                </div>
               </div>
             </div>
             <div className="lg:col-span-2 grid md:grid-cols-3 gap-4">
@@ -286,18 +318,31 @@ export default function Index() {
             <Card className="border-0 shadow-lg">
               <CardHeader>
                 <CardTitle className="text-legal-900">Get in touch</CardTitle>
-                <CardDescription>We\'ll respond within 1 business day</CardDescription>
+                <CardDescription>
+                  We\'ll respond within 1 business day
+                </CardDescription>
               </CardHeader>
               <CardContent className="text-center">
                 <form onSubmit={onContactSubmit} className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="name">Full name</Label>
-                      <Input id="name" name="name" required placeholder="Jane Doe" />
+                      <Input
+                        id="name"
+                        name="name"
+                        required
+                        placeholder="Jane Doe"
+                      />
                     </div>
                     <div>
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" name="email" type="email" required placeholder="jane@firm.com" />
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="jane@firm.com"
+                      />
                     </div>
                   </div>
                   <div>
@@ -306,17 +351,34 @@ export default function Index() {
                   </div>
                   <div>
                     <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" name="message" required placeholder="Tell us about your needs..." className="min-h-[140px]" />
+                    <Textarea
+                      id="message"
+                      name="message"
+                      required
+                      placeholder="Tell us about your needs..."
+                      className="min-h-[140px]"
+                    />
                   </div>
                   <div className="flex gap-3">
-                    <Button type="submit" className="bg-legal-700 hover:bg-legal-800">Send message</Button>
-                    <a href="#features"><Button type="button" variant="outline">Explore features</Button></a>
+                    <Button
+                      type="submit"
+                      className="bg-legal-700 hover:bg-legal-800"
+                    >
+                      Send message
+                    </Button>
+                    <a href="#features">
+                      <Button type="button" variant="outline">
+                        Explore features
+                      </Button>
+                    </a>
                   </div>
                 </form>
               </CardContent>
             </Card>
             <div className="p-8 rounded-2xl border border-legal-200 bg-white/70 shadow-sm">
-              <h3 className="text-xl font-semibold text-legal-900">Why choose us</h3>
+              <h3 className="text-xl font-semibold text-legal-900">
+                Why choose us
+              </h3>
               <ul className="mt-4 space-y-3 text-legal-800">
                 <li>• Enterprise-grade security</li>
                 <li>• On-prem or cloud options</li>
@@ -344,13 +406,20 @@ export default function Index() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/contact">
-              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-gold-900 font-semibold text-lg px-8">
+              <Button
+                size="lg"
+                className="bg-gold-500 hover:bg-gold-600 text-gold-900 font-semibold text-lg px-8"
+              >
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </a>
             <a href="/contact">
-              <Button size="lg" variant="outline" className="text-lg px-8 border-legal-300 text-legal-100 hover:bg-legal-700">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-lg px-8 border-legal-300 text-legal-100 hover:bg-legal-700"
+              >
                 Sign In
               </Button>
             </a>
