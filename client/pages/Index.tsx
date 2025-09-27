@@ -187,7 +187,7 @@ export default function Index() {
                     <CardDescription className="text-base leading-relaxed text-center mx-auto max-w-[36ch]">
                       {feature.description}
                     </CardDescription>
-                    <div className="flex items-center mt-4 text-legal-600 group-hover:text-legal-700 transition-colors">
+                    <div className="flex items-center justify-center mt-4 text-legal-600 group-hover:text-legal-700 transition-colors">
                       <span className="text-sm font-medium">Learn more</span>
                       <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </div>
