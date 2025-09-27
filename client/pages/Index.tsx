@@ -114,7 +114,7 @@ export default function Index() {
           </Badge>
           <h1 className="text-5xl md:text-6xl font-bold text-legal-900 mb-6 leading-[1.15] md:leading-[1.1]">
             The Future of
-            <span className="block bg-gradient-to-r from-legal-600 to-gold-600 bg-clip-text text-transparent">
+            <span className="inline-block bg-gradient-to-r from-legal-600 to-gold-600 bg-clip-text text-transparent pb-1">
               Legal Intelligence
             </span>
           </h1>
