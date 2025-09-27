@@ -124,13 +124,13 @@ export default function Index() {
             modern legal professionals need.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#contact">
+            <a href="/contact">
               <Button size="lg" className="bg-legal-700 hover:bg-legal-800 text-lg px-8">
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </a>
-            <a href="#contact">
+            <a href="/contact">
               <Button size="lg" variant="outline" className="text-lg px-8 border-legal-200 hover:bg-legal-50">
                 Sign In
               </Button>
@@ -342,13 +342,13 @@ export default function Index() {
             work smarter, not harder.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#contact">
+            <a href="/contact">
               <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-gold-900 font-semibold text-lg px-8">
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </a>
-            <a href="#contact">
+            <a href="/contact">
               <Button size="lg" variant="outline" className="text-lg px-8 border-legal-300 text-legal-100 hover:bg-legal-700">
                 Sign In
               </Button>
