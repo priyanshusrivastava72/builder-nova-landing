@@ -140,17 +140,18 @@ export default function Index() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 px-4 bg-legal-900 text-white">
+      <section className="py-16 px-4">
         <div className="container mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((stat, index) => (
-              <div key={index} className="space-y-2">
-                <div className="text-3xl md:text-4xl font-bold text-gold-400">
-                  {stat.number}
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-legal-800 via-legal-900 to-legal-950 text-white ring-1 ring-white/10 shadow-xl">
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-gold-500/20 via-transparent to-transparent" />
+            <div className="relative grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+              {stats.map((stat, index) => (
+                <div key={index} className="p-8 md:p-10 text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-gold-400">{stat.number}</div>
+                  <div className="mt-2 text-sm uppercase tracking-wide text-legal-200">{stat.label}</div>
                 </div>
-                <div className="text-legal-200">{stat.label}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
