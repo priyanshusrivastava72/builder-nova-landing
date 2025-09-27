@@ -173,7 +173,7 @@ export default function Index() {
             {features.map((feature, index) => (
               <Link key={index} to={feature.href}>
                 <Card className="relative h-full rounded-2xl border border-legal-200/60 bg-white/60 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                  <CardHeader className="pb-4">
+                  <CardHeader className="pb-4 text-center">
                     <div
                       className={`w-16 h-16 rounded-xl ring-4 ring-white/60 bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}
                     >
