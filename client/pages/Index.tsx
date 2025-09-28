@@ -146,7 +146,8 @@ export default function Index() {
     const format = (n: number) => {
       if (isStatic) return valueStr;
       if (isPercent) return `${Math.round(n)}%`;
-      if (isM) return `${(n / 1_000_000).toFixed(valueStr.includes(".") ? 1 : 0)}M+`;
+      if (isM)
+        return `${(n / 1_000_000).toFixed(valueStr.includes(".") ? 1 : 0)}M+`;
       if (isK) return `${Math.round(n / 1000)}K+`;
       return Math.round(n).toString();
     };
@@ -233,7 +234,11 @@ export default function Index() {
 
           <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
             {features.map((feature, index) => (
-              <Link key={index} to={feature.href} className="group basis-[320px] grow-0">
+              <Link
+                key={index}
+                to={feature.href}
+                className="group basis-[320px] grow-0"
+              >
                 <Card className="relative h-full rounded-2xl border border-legal-200/60 bg-white/60 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                   <CardHeader className="pb-4">
                     <div

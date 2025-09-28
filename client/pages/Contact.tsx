@@ -37,34 +37,48 @@ export default function Contact() {
           <div className="mb-8 p-6 rounded-2xl border border-legal-200 bg-white/70 shadow-sm">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-legal-100 text-legal-800 flex items-center justify-center"><Mail className="w-5 h-5"/></div>
+                <div className="w-10 h-10 rounded-lg bg-legal-100 text-legal-800 flex items-center justify-center">
+                  <Mail className="w-5 h-5" />
+                </div>
                 <div>
                   <div className="font-medium text-legal-900">Email</div>
                   <div>contact@legalai.app</div>
-                  <div className="text-sm text-muted-foreground">support@legalai.app</div>
+                  <div className="text-sm text-muted-foreground">
+                    support@legalai.app
+                  </div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-legal-100 text-legal-800 flex items-center justify-center"><Phone className="w-5 h-5"/></div>
+                <div className="w-10 h-10 rounded-lg bg-legal-100 text-legal-800 flex items-center justify-center">
+                  <Phone className="w-5 h-5" />
+                </div>
                 <div>
                   <div className="font-medium text-legal-900">Phone</div>
                   <div>+1 (415) 555-0132</div>
-                  <div className="text-sm text-muted-foreground">Mon–Fri, 9:00–18:00 PT</div>
+                  <div className="text-sm text-muted-foreground">
+                    Mon–Fri, 9:00–18:00 PT
+                  </div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-legal-100 text-legal-800 flex items-center justify-center"><MapPin className="w-5 h-5"/></div>
+                <div className="w-10 h-10 rounded-lg bg-legal-100 text-legal-800 flex items-center justify-center">
+                  <MapPin className="w-5 h-5" />
+                </div>
                 <div>
                   <div className="font-medium text-legal-900">Office</div>
                   <div>123 Market St, San Francisco, CA</div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-legal-100 text-legal-800 flex items-center justify-center"><Clock className="w-5 h-5"/></div>
+                <div className="w-10 h-10 rounded-lg bg-legal-100 text-legal-800 flex items-center justify-center">
+                  <Clock className="w-5 h-5" />
+                </div>
                 <div>
                   <div className="font-medium text-legal-900">Hours</div>
                   <div>Mon–Fri</div>
-                  <div className="text-sm text-muted-foreground">9:00 AM – 6:00 PM (PT)</div>
+                  <div className="text-sm text-muted-foreground">
+                    9:00 AM – 6:00 PM (PT)
+                  </div>
                 </div>
               </div>
             </div>
@@ -79,15 +93,31 @@ export default function Contact() {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="name">Full name</Label>
-                    <Input id="name" name="name" required placeholder="Jane Doe" />
+                    <Input
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="Jane Doe"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" name="email" type="email" required placeholder="jane@firm.com" />
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="jane@firm.com"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="phone">Phone</Label>
-                    <Input id="phone" name="phone" type="tel" placeholder="+1 415 555 0132" />
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="+1 415 555 0132"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="org">Firm / Company</Label>
