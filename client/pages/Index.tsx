@@ -20,6 +20,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Layout from "@/components/Layout";
 import { Input } from "@/components/ui/input";
@@ -106,6 +107,53 @@ export default function Index() {
     },
   ];
 
+  function CountUp({ valueStr }: { valueStr: string }) {
+    const [val, setVal] = useState(0);
+    const [done, setDone] = useState(false);
+
+    // Determine format
+    const isPercent = /%$/.test(valueStr);
+    const isK = /k\+?$/i.test(valueStr);
+    const isM = /m\+?$/i.test(valueStr);
+    const isStatic = /\//.test(valueStr);
+
+    const target = (() => {
+      if (isStatic) return 0;
+      const n = parseFloat(valueStr);
+      if (isNaN(n)) return 0;
+      if (isPercent) return n;
+      if (isK) return n * 1000;
+      if (isM) return n * 1000000;
+      return n;
+    })();
+
+    useEffect(() => {
+      if (isStatic) return;
+      const dur = 1000;
+      const start = performance.now();
+      let raf = 0;
+      const tick = (t: number) => {
+        const p = Math.min(1, (t - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setVal(target * eased);
+        if (p < 1) raf = requestAnimationFrame(tick);
+        else setDone(true);
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, [valueStr]);
+
+    const format = (n: number) => {
+      if (isStatic) return valueStr;
+      if (isPercent) return `${Math.round(n)}%`;
+      if (isM) return `${(n / 1_000_000).toFixed(valueStr.includes(".") ? 1 : 0)}M+`;
+      if (isK) return `${Math.round(n / 1000)}K+`;
+      return Math.round(n).toString();
+    };
+
+    return <>{done ? format(target) : format(val)}</>;
+  }
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -117,7 +165,7 @@ export default function Index() {
           </Badge>
           <h1 className="text-5xl md:text-6xl font-bold text-legal-900 mb-6 leading-[1.15] md:leading-[1.1]">
             The Future of
-            <span className="inline-block bg-gradient-to-r from-legal-600 to-gold-600 bg-clip-text text-transparent pb-1">
+            <span className="inline-block bg-gradient-to-r from-legal-600 to-gold-600 bg-clip-text text-transparent pb-2">
               Legal Intelligence
             </span>
           </h1>
@@ -150,15 +198,15 @@ export default function Index() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 px-4">
+      <section className="py-10 px-4">
         <div className="container mx-auto">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-legal-800 via-legal-900 to-legal-950 text-white ring-1 ring-white/10 shadow-xl">
             <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-gold-500/20 via-transparent to-transparent" />
             <div className="relative grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
               {stats.map((stat, index) => (
-                <div key={index} className="p-8 md:p-10 text-center">
+                <div key={index} className="p-4 md:p-6 text-center">
                   <div className="text-4xl md:text-5xl font-bold text-gold-400">
-                    {stat.number}
+                    <CountUp valueStr={stat.number} />
                   </div>
                   <div className="mt-2 text-sm uppercase tracking-wide text-legal-200">
                     {stat.label}
@@ -183,11 +231,11 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
             {features.map((feature, index) => (
-              <Link key={index} to={feature.href}>
+              <Link key={index} to={feature.href} className="group basis-[320px] grow-0">
                 <Card className="relative h-full rounded-2xl border border-legal-200/60 bg-white/60 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                  <CardHeader className="pb-4 text-center">
+                  <CardHeader className="pb-4">
                     <div
                       className={`w-16 h-16 rounded-xl ring-4 ring-white/60 bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}
                     >
@@ -197,11 +245,11 @@ export default function Index() {
                       {feature.title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="text-center">
-                    <CardDescription className="text-base leading-relaxed text-center mx-auto max-w-[36ch]">
+                  <CardContent>
+                    <CardDescription className="text-base leading-relaxed">
                       {feature.description}
                     </CardDescription>
-                    <div className="flex items-center justify-center mt-4 text-legal-600 group-hover:text-legal-700 transition-colors">
+                    <div className="flex items-center mt-4 text-legal-600 group-hover:text-legal-700 transition-colors">
                       <span className="text-sm font-medium">Learn more</span>
                       <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </div>
