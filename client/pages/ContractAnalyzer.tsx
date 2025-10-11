@@ -89,6 +89,27 @@ const RISKS: Risk[] = [
   },
 ];
 
+const EXAMPLES = [
+  {
+    id: "saas",
+    label: "SaaS Subscription",
+    text:
+      "The Company may modify or amend these Terms at any time without notice. This Agreement shall auto-renew for successive one-year terms unless Customer provides written notice of non-renewal 30 days prior to the end of the then-current term. Customer agrees to indemnify Company against any and all claims or damages. Company disclaims all liability, and in no event shall Company be liable for any damages. Either party may terminate for convenience. All disputes shall be resolved by binding arbitration and Customer waives their right to a jury trial.",
+  },
+  {
+    id: "employment",
+    label: "Employment Agreement",
+    text:
+      "Employee agrees not to compete with Employer for a period of 12 months following termination and not to solicit any clients for two years. Employer may terminate this Agreement at any time for convenience upon 7 days' notice. Employee agrees to indemnify Employer for any and all losses caused by breach of confidentiality obligations. Any controversy shall be submitted to binding arbitration and the parties waive a jury trial.",
+  },
+  {
+    id: "dpa",
+    label: "Data Processing Addendum",
+    text:
+      "Processor may share personal information with affiliates and third parties for processing activities. The parties agree that the cap on liability for any breach shall not exceed fees paid in the preceding twelve months, and certain categories of liability are excluded. Vendor may modify these terms from time to time by posting an updated policy. Vendor does not sell data, but may transfer data to sub-processors.",
+  },
+] as const;
+
 function highlight(
   text: string,
   risks: { start: number; end: number; risk: Risk }[],
@@ -165,9 +186,15 @@ export default function ContractAnalyzer() {
                   className="min-h-[320px]"
                 />
                 <div className="flex flex-wrap gap-2">
-                  <Button variant="outline" onClick={() => setText(EXAMPLE)}>
-                    Load Example
-                  </Button>
+                  {EXAMPLES.map((ex) => (
+                    <Button
+                      key={ex.id}
+                      variant="outline"
+                      onClick={() => setText(ex.text)}
+                    >
+                      Load {ex.label}
+                    </Button>
+                  ))}
                   <Button variant="outline" onClick={() => setText("")}>
                     Clear
                   </Button>
@@ -245,5 +272,3 @@ export default function ContractAnalyzer() {
     </Layout>
   );
 }
-
-const EXAMPLE = `The Company may modify or amend these Terms at any time without notice. This Agreement shall auto-renew for successive one-year terms unless Customer provides written notice of non-renewal 30 days prior to the end of the then-current term. Customer agrees to indemnify Company against any and all claims or damages. Company disclaims all liability, and in no event shall Company be liable for any damages. Either party may terminate for convenience. All disputes shall be resolved by binding arbitration and Customer waives their right to a jury trial.`;
