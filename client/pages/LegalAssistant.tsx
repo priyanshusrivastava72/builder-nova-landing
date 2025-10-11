@@ -54,15 +54,15 @@ export default function LegalAssistant() {
       title: r.doc.title,
       snippet: pickSnippet(r.doc.fullText, q),
     }));
-    const context = sources
-      .map((s) => `- ${s.title}: ${s.snippet}`)
-      .join("\n");
+    const context = sources.map((s) => `- ${s.title}: ${s.snippet}`).join("\n");
 
     try {
       const res = await fetch("/api/assistant/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: `${q}\n\nContext (optional local references):\n${context}` }),
+        body: JSON.stringify({
+          query: `${q}\n\nContext (optional local references):\n${context}`,
+        }),
       });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
@@ -78,8 +78,7 @@ export default function LegalAssistant() {
         ...m,
         {
           role: "assistant",
-          text:
-            "I couldn't reach the AI service right now. Please try again in a moment.",
+          text: "I couldn't reach the AI service right now. Please try again in a moment.",
         },
       ]);
     } finally {
@@ -95,7 +94,9 @@ export default function LegalAssistant() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-legal-100 text-legal-800 mb-3">
               <Sparkles className="w-3 h-3" /> Conversational Legal AI
             </div>
-            <h1 className="text-4xl font-bold text-legal-900">Legal Assistant</h1>
+            <h1 className="text-4xl font-bold text-legal-900">
+              Legal Assistant
+            </h1>
             <p className="text-muted-foreground mt-2">
               Ask questions and get answers with citations to related cases
             </p>
