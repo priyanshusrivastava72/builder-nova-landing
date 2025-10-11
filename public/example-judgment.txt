@@ -1,0 +1,20 @@
+IN THE HIGH COURT OF METROPOLIS
+
+Doe v. City Transit Authority, 2021 MHC 112
+
+Background:
+The plaintiff, Jane Doe, seeks damages for injuries sustained in a bus incident on January 12, 2021. She alleges negligence by the driver for excessive speed and failure to maintain a proper lookout. The defendant denies negligence and asserts comparative fault, claiming the plaintiff failed to wear a seatbelt and disregarded safety instructions.
+
+Issues:
+1. Whether the defendant breached the standard of care.
+2. Whether the plaintiff’s conduct amounted to comparative negligence.
+3. Admissibility of certain hearsay statements under the excited utterance exception.
+
+Findings:
+The maintenance records, stopping-distance expert testimony, and surveillance video raise triable issues regarding breach and causation. The court declines to resolve credibility disputes on summary judgment. Regarding hearsay, the court finds the statements contemporaneous with the startling event admissible under the excited utterance exception.
+
+Holding:
+Summary judgment is denied. The matter is set for trial on breach and causation with comparative negligence to be determined by the jury. Motions in limine concerning prior incidents are granted in part to exclude unduly prejudicial evidence while allowing limited contextual references.
+
+Disposition:
+Proceed to trial; parties to exchange witness lists and exhibits within 14 days.

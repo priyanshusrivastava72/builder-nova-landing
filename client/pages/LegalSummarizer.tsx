@@ -28,10 +28,13 @@ export default function LegalSummarizer() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [dragActive, setDragActive] = useState(false);
   const [text, setText] = useState("");
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
+    setError(null);
     // Simulate processing
     setTimeout(() => setIsProcessing(false), 3000);
   };
@@ -43,6 +46,57 @@ export default function LegalSummarizer() {
       setDragActive(true);
     } else if (e.type === "dragleave") {
       setDragActive(false);
+    }
+  };
+
+  const processFile = (file: File) => {
+    setError(null);
+    setFileName(file.name);
+
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      setError("File exceeds 10MB limit.");
+      return;
+    }
+
+    if (file.type === "text/plain" || file.name.toLowerCase().endsWith(".txt")) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = typeof reader.result === "string" ? reader.result : "";
+        setText(result);
+      };
+      reader.onerror = () => setError("Failed to read file.");
+      reader.readAsText(file);
+    } else {
+      setError(
+        "This demo can read .txt files. For PDF/DOC/DOCX, please paste text or use 'Upload Dummy Data'."
+      );
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      processFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (f) processFile(f);
+  };
+
+  const loadDummyData = async () => {
+    try {
+      setError(null);
+      const res = await fetch("/example-judgment.txt");
+      const txt = await res.text();
+      setText(txt);
+      setFileName("example-judgment.txt");
+    } catch (err) {
+      setError("Unable to load dummy data.");
     }
   };
 
@@ -105,28 +159,40 @@ export default function LegalSummarizer() {
                     onDragEnter={handleDrag}
                     onDragLeave={handleDrag}
                     onDragOver={handleDrag}
+                    onDrop={handleDrop}
                   >
                     <FileText className="mx-auto h-12 w-12 text-legal-400 mb-4" />
                     <p className="text-sm text-muted-foreground mb-2">
                       Drag and drop your file here, or click to browse
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Supports PDF, DOC, DOCX files up to 10MB
+                      Supports PDF, DOC, DOCX, TXT files up to 10MB
                     </p>
                     <Input
                       id="file"
                       type="file"
                       className="hidden"
-                      accept=".pdf,.doc,.docx"
+                      accept=".pdf,.doc,.docx,.txt"
+                      onChange={handleFileInput}
                     />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="mt-4"
-                      onClick={() => document.getElementById("file")?.click()}
-                    >
-                      Choose File
-                    </Button>
+                    <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => document.getElementById("file")?.click()}
+                      >
+                        Choose File
+                      </Button>
+                      <Button type="button" variant="outline" onClick={loadDummyData}>
+                        Upload Dummy Data
+                      </Button>
+                    </div>
+                    {fileName && (
+                      <p className="mt-3 text-xs text-legal-600">Selected: {fileName}</p>
+                    )}
+                    {error && (
+                      <p className="mt-2 text-xs text-destructive">{error}</p>
+                    )}
                   </div>
                 </div>
 
@@ -160,9 +226,7 @@ export default function LegalSummarizer() {
 
                 {/* Settings */}
                 <div className="space-y-4 p-4 bg-legal-50 rounded-lg">
-                  <h3 className="font-medium text-legal-900">
-                    Summary Options
-                  </h3>
+                  <h3 className="font-medium text-legal-900">Summary Options</h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="length">Summary Length</Label>
@@ -171,12 +235,8 @@ export default function LegalSummarizer() {
                         className="w-full px-3 py-2 border border-legal-200 rounded-md focus:outline-none focus:ring-2 focus:ring-legal-500"
                       >
                         <option value="brief">Brief (1-2 paragraphs)</option>
-                        <option value="standard">
-                          Standard (3-5 paragraphs)
-                        </option>
-                        <option value="detailed">
-                          Detailed (5+ paragraphs)
-                        </option>
+                        <option value="standard">Standard (3-5 paragraphs)</option>
+                        <option value="detailed">Detailed (5+ paragraphs)</option>
                       </select>
                     </div>
                     <div className="space-y-2">
@@ -245,9 +305,7 @@ export default function LegalSummarizer() {
                 <div className="text-center py-12 text-muted-foreground">
                   <FileText className="mx-auto h-12 w-12 mb-4" />
                   <p>Upload a document or paste text to generate a summary</p>
-                  <p className="text-sm mt-2">
-                    Your AI-powered legal brief will appear here
-                  </p>
+                  <p className="text-sm mt-2">Your AI-powered legal brief will appear here</p>
                 </div>
               )}
             </CardContent>
@@ -265,12 +323,8 @@ export default function LegalSummarizer() {
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white mx-auto mb-4">
                   <Zap className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-legal-900 mb-2">
-                  Lightning Fast
-                </h3>
-                <p className="text-muted-foreground">
-                  Generate comprehensive summaries in under 30 seconds
-                </p>
+                <h3 className="font-semibold text-legal-900 mb-2">Lightning Fast</h3>
+                <p className="text-muted-foreground">Generate comprehensive summaries in under 30 seconds</p>
               </CardContent>
             </Card>
             <Card className="text-center border-0 shadow-md">
@@ -278,12 +332,8 @@ export default function LegalSummarizer() {
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white mx-auto mb-4">
                   <CheckCircle className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-legal-900 mb-2">
-                  Highly Accurate
-                </h3>
-                <p className="text-muted-foreground">
-                  98% accuracy rate verified by legal professionals
-                </p>
+                <h3 className="font-semibold text-legal-900 mb-2">Highly Accurate</h3>
+                <p className="text-muted-foreground">98% accuracy rate verified by legal professionals</p>
               </CardContent>
             </Card>
             <Card className="text-center border-0 shadow-md">
@@ -291,12 +341,8 @@ export default function LegalSummarizer() {
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center text-white mx-auto mb-4">
                   <Clock className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-legal-900 mb-2">
-                  Time Saving
-                </h3>
-                <p className="text-muted-foreground">
-                  Reduce document review time by up to 90%
-                </p>
+                <h3 className="font-semibold text-legal-900 mb-2">Time Saving</h3>
+                <p className="text-muted-foreground">Reduce document review time by up to 90%</p>
               </CardContent>
             </Card>
           </div>
