@@ -143,6 +143,12 @@ export default function LegalAssistant() {
                   "probable cause for search",
                   "comparative negligence",
                   "trade secret injunction",
+                  "auto-renewal clause enforceability",
+                  "bad faith insurance denial",
+                  "non-compete 12 months scope",
+                  "force majeure pandemic",
+                  "liability cap carve-outs",
+                  "whistleblower retaliation proof",
                 ].map((s) => (
                   <button
                     key={s}
