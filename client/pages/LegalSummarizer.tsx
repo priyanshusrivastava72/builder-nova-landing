@@ -30,13 +30,39 @@ export default function LegalSummarizer() {
   const [text, setText] = useState("");
   const [fileName, setFileName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [summary, setSummary] = useState<string>("");
+  const [length, setLength] = useState<"brief" | "standard" | "detailed">("standard");
+  const [focus, setFocus] = useState<"general" | "facts" | "ruling" | "precedent">("general");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsProcessing(true);
     setError(null);
-    // Simulate processing
-    setTimeout(() => setIsProcessing(false), 3000);
+    setSummary("");
+
+    const body = text.trim();
+    if (!body) {
+      setError("Please paste text or upload a .txt file to summarize.");
+      return;
+    }
+
+    setIsProcessing(true);
+    try {
+      const res = await fetch("/api/summarize", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: body, length, focus }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error || `Request failed (${res.status})`);
+      }
+      const data = (await res.json()) as { summary: string };
+      setSummary(data.summary);
+    } catch (e: any) {
+      setError(e?.message || "Failed to generate summary.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleDrag = (e: React.DragEvent) => {
@@ -202,7 +228,7 @@ export default function LegalSummarizer() {
                   <Textarea
                     id="text"
                     placeholder="Paste your legal document text here..."
-                    className="min-h-[200px] resize-none"
+                    className="min-h[200px] resize-none min-h-[200px]"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                   />
@@ -233,6 +259,8 @@ export default function LegalSummarizer() {
                       <select
                         id="length"
                         className="w-full px-3 py-2 border border-legal-200 rounded-md focus:outline-none focus:ring-2 focus:ring-legal-500"
+                        value={length}
+                        onChange={(e) => setLength(e.target.value as any)}
                       >
                         <option value="brief">Brief (1-2 paragraphs)</option>
                         <option value="standard">Standard (3-5 paragraphs)</option>
@@ -244,6 +272,8 @@ export default function LegalSummarizer() {
                       <select
                         id="focus"
                         className="w-full px-3 py-2 border border-legal-200 rounded-md focus:outline-none focus:ring-2 focus:ring-legal-500"
+                        value={focus}
+                        onChange={(e) => setFocus(e.target.value as any)}
                       >
                         <option value="general">General Summary</option>
                         <option value="facts">Key Facts</option>
@@ -301,12 +331,17 @@ export default function LegalSummarizer() {
                     Analyzing document and generating summary...
                   </div>
                 </div>
+              ) : summary ? (
+                <div className="prose prose-sm max-w-none whitespace-pre-wrap">{summary}</div>
               ) : (
                 <div className="text-center py-12 text-muted-foreground">
                   <FileText className="mx-auto h-12 w-12 mb-4" />
                   <p>Upload a document or paste text to generate a summary</p>
                   <p className="text-sm mt-2">Your AI-powered legal brief will appear here</p>
                 </div>
+              )}
+              {error && !isProcessing && (
+                <p className="mt-4 text-sm text-destructive">{error}</p>
               )}
             </CardContent>
           </Card>
