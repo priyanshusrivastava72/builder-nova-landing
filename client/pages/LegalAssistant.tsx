@@ -47,21 +47,44 @@ export default function LegalAssistant() {
     setMessages((m) => [...m, { role: "user", text: q }]);
     setLoading(true);
 
-    // Retrieve relevant cases
+    // Retrieve relevant cases to provide context to the AI model
     const idx = idxRef.current!;
     const retrieved = search(idx, q, 3);
-
-    // Craft a heuristic answer using retrieved snippets
     const sources = retrieved.map((r) => ({
       title: r.doc.title,
       snippet: pickSnippet(r.doc.fullText, q),
     }));
+    const context = sources
+      .map((s) => `- ${s.title}: ${s.snippet}`)
+      .join("\n");
 
-    const answer = buildAnswer(q, sources);
-
-    await new Promise((r) => setTimeout(r, 400));
-    setMessages((m) => [...m, { role: "assistant", text: answer, sources }]);
-    setLoading(false);
+    try {
+      const res = await fetch("/api/assistant/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: `${q}\n\nContext (optional local references):\n${context}` }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error || `Request failed (${res.status})`);
+      }
+      const data = (await res.json()) as { text: string };
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", text: data.text || "", sources },
+      ]);
+    } catch (e: any) {
+      setMessages((m) => [
+        ...m,
+        {
+          role: "assistant",
+          text:
+            "I couldn't reach the AI service right now. Please try again in a moment.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -72,9 +95,7 @@ export default function LegalAssistant() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-legal-100 text-legal-800 mb-3">
               <Sparkles className="w-3 h-3" /> Conversational Legal AI
             </div>
-            <h1 className="text-4xl font-bold text-legal-900">
-              Legal Assistant
-            </h1>
+            <h1 className="text-4xl font-bold text-legal-900">Legal Assistant</h1>
             <p className="text-muted-foreground mt-2">
               Ask questions and get answers with citations to related cases
             </p>
@@ -95,7 +116,11 @@ export default function LegalAssistant() {
                     className={`max-w-[85%] ${m.role === "user" ? "ml-auto text-right" : ""}`}
                   >
                     <div
-                      className={`inline-block px-4 py-3 rounded-2xl ${m.role === "user" ? "bg-legal-700 text-white" : "bg-white border border-legal-200 text-legal-900"}`}
+                      className={`inline-block px-4 py-3 rounded-2xl ${
+                        m.role === "user"
+                          ? "bg-legal-700 text-white"
+                          : "bg-white border border-legal-200 text-legal-900"
+                      }`}
                     >
                       <p className="whitespace-pre-wrap">{m.text}</p>
                     </div>
@@ -182,11 +207,4 @@ function pickSnippet(text: string, q: string) {
     }
   }
   return best;
-}
-
-function buildAnswer(q: string, sources: { title: string; snippet: string }[]) {
-  const intro = `Here\'s what applies to your question: ${q}`;
-  const bullets = sources.map((s) => `- ${s.title}: ${s.snippet}`);
-  const outro = `These cases provide guidance. Always interpret in your jurisdictional context.`;
-  return [intro, "", ...bullets, "", outro].join("\n");
 }
