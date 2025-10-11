@@ -4,6 +4,7 @@ import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleAssistantChat } from "./routes/assistant";
 import { handleSummarize } from "./routes/summarize";
+import { handleOutcomePredict } from "./routes/outcome";
 
 export function createServer() {
   const app = express();
