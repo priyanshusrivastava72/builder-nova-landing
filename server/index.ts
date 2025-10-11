@@ -28,5 +28,8 @@ export function createServer() {
   // Summarizer route
   app.post("/api/summarize", handleSummarize);
 
+  // Outcome predictor route
+  app.post("/api/outcome/predict", handleOutcomePredict);
+
   return app;
 }
