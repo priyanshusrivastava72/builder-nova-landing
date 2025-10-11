@@ -30,7 +30,7 @@ export const handleOutcomePredict: RequestHandler = async (req, res) => {
         inputs: text,
         parameters: {
           candidate_labels,
-          hypothesis_template: "This legal case outcome favors the {label}.",
+          hypothesis_template: "This legal case outcome favors the {}.",
           multi_label: false,
         },
       }),
