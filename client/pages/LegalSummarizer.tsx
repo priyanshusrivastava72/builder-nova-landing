@@ -31,8 +31,12 @@ export default function LegalSummarizer() {
   const [fileName, setFileName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [summary, setSummary] = useState<string>("");
-  const [length, setLength] = useState<"brief" | "standard" | "detailed">("standard");
-  const [focus, setFocus] = useState<"general" | "facts" | "ruling" | "precedent">("general");
+  const [length, setLength] = useState<"brief" | "standard" | "detailed">(
+    "standard",
+  );
+  const [focus, setFocus] = useState<
+    "general" | "facts" | "ruling" | "precedent"
+  >("general");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,7 +89,10 @@ export default function LegalSummarizer() {
       return;
     }
 
-    if (file.type === "text/plain" || file.name.toLowerCase().endsWith(".txt")) {
+    if (
+      file.type === "text/plain" ||
+      file.name.toLowerCase().endsWith(".txt")
+    ) {
       const reader = new FileReader();
       reader.onload = () => {
         const result = typeof reader.result === "string" ? reader.result : "";
@@ -95,7 +102,7 @@ export default function LegalSummarizer() {
       reader.readAsText(file);
     } else {
       setError(
-        "This demo can read .txt files. For PDF/DOC/DOCX, please paste text or use 'Upload Dummy Data'."
+        "This demo can read .txt files. For PDF/DOC/DOCX, please paste text or use 'Upload Dummy Data'.",
       );
     }
   };
@@ -209,12 +216,18 @@ export default function LegalSummarizer() {
                       >
                         Choose File
                       </Button>
-                      <Button type="button" variant="outline" onClick={loadDummyData}>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={loadDummyData}
+                      >
                         Upload Dummy Data
                       </Button>
                     </div>
                     {fileName && (
-                      <p className="mt-3 text-xs text-legal-600">Selected: {fileName}</p>
+                      <p className="mt-3 text-xs text-legal-600">
+                        Selected: {fileName}
+                      </p>
                     )}
                     {error && (
                       <p className="mt-2 text-xs text-destructive">{error}</p>
@@ -238,13 +251,17 @@ export default function LegalSummarizer() {
                       variant="outline"
                       onClick={() =>
                         setText(
-                          "In the matter of Doe v. City Transit, the plaintiff alleges negligence arising from a bus accident on January 12, 2021. Plaintiff contends the driver breached the standard of care by speeding and failing to maintain a proper lookout. The City denies liability and asserts comparative negligence, alleging plaintiff failed to wear a seatbelt and ignored safety instructions. The trial court considered expert testimony on stopping distance and maintenance records for the vehicle. On summary judgment, the court held genuine disputes of material fact existed as to breach and causation, and set the matter for trial. The court also addressed the admissibility of certain hearsay statements under the excited utterance exception and ruled on motions in limine regarding prior incidents."
+                          "In the matter of Doe v. City Transit, the plaintiff alleges negligence arising from a bus accident on January 12, 2021. Plaintiff contends the driver breached the standard of care by speeding and failing to maintain a proper lookout. The City denies liability and asserts comparative negligence, alleging plaintiff failed to wear a seatbelt and ignored safety instructions. The trial court considered expert testimony on stopping distance and maintenance records for the vehicle. On summary judgment, the court held genuine disputes of material fact existed as to breach and causation, and set the matter for trial. The court also addressed the admissibility of certain hearsay statements under the excited utterance exception and ruled on motions in limine regarding prior incidents.",
                         )
                       }
                     >
                       Load Example Judgment
                     </Button>
-                    <Button type="button" variant="outline" onClick={() => setText("")}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setText("")}
+                    >
                       Clear
                     </Button>
                   </div>
@@ -252,7 +269,9 @@ export default function LegalSummarizer() {
 
                 {/* Settings */}
                 <div className="space-y-4 p-4 bg-legal-50 rounded-lg">
-                  <h3 className="font-medium text-legal-900">Summary Options</h3>
+                  <h3 className="font-medium text-legal-900">
+                    Summary Options
+                  </h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="length">Summary Length</Label>
@@ -263,8 +282,12 @@ export default function LegalSummarizer() {
                         onChange={(e) => setLength(e.target.value as any)}
                       >
                         <option value="brief">Brief (1-2 paragraphs)</option>
-                        <option value="standard">Standard (3-5 paragraphs)</option>
-                        <option value="detailed">Detailed (5+ paragraphs)</option>
+                        <option value="standard">
+                          Standard (3-5 paragraphs)
+                        </option>
+                        <option value="detailed">
+                          Detailed (5+ paragraphs)
+                        </option>
                       </select>
                     </div>
                     <div className="space-y-2">
@@ -332,12 +355,16 @@ export default function LegalSummarizer() {
                   </div>
                 </div>
               ) : summary ? (
-                <div className="prose prose-sm max-w-none whitespace-pre-wrap">{summary}</div>
+                <div className="prose prose-sm max-w-none whitespace-pre-wrap">
+                  {summary}
+                </div>
               ) : (
                 <div className="text-center py-12 text-muted-foreground">
                   <FileText className="mx-auto h-12 w-12 mb-4" />
                   <p>Upload a document or paste text to generate a summary</p>
-                  <p className="text-sm mt-2">Your AI-powered legal brief will appear here</p>
+                  <p className="text-sm mt-2">
+                    Your AI-powered legal brief will appear here
+                  </p>
                 </div>
               )}
               {error && !isProcessing && (
@@ -358,8 +385,12 @@ export default function LegalSummarizer() {
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white mx-auto mb-4">
                   <Zap className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-legal-900 mb-2">Lightning Fast</h3>
-                <p className="text-muted-foreground">Generate comprehensive summaries in under 30 seconds</p>
+                <h3 className="font-semibold text-legal-900 mb-2">
+                  Lightning Fast
+                </h3>
+                <p className="text-muted-foreground">
+                  Generate comprehensive summaries in under 30 seconds
+                </p>
               </CardContent>
             </Card>
             <Card className="text-center border-0 shadow-md">
@@ -367,8 +398,12 @@ export default function LegalSummarizer() {
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white mx-auto mb-4">
                   <CheckCircle className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-legal-900 mb-2">Highly Accurate</h3>
-                <p className="text-muted-foreground">98% accuracy rate verified by legal professionals</p>
+                <h3 className="font-semibold text-legal-900 mb-2">
+                  Highly Accurate
+                </h3>
+                <p className="text-muted-foreground">
+                  98% accuracy rate verified by legal professionals
+                </p>
               </CardContent>
             </Card>
             <Card className="text-center border-0 shadow-md">
@@ -376,8 +411,12 @@ export default function LegalSummarizer() {
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center text-white mx-auto mb-4">
                   <Clock className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-legal-900 mb-2">Time Saving</h3>
-                <p className="text-muted-foreground">Reduce document review time by up to 90%</p>
+                <h3 className="font-semibold text-legal-900 mb-2">
+                  Time Saving
+                </h3>
+                <p className="text-muted-foreground">
+                  Reduce document review time by up to 90%
+                </p>
               </CardContent>
             </Card>
           </div>

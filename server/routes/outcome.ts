@@ -1,7 +1,9 @@
 import type { RequestHandler } from "express";
 
-const ZS_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli";
-const SUM_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
+const ZS_URL =
+  "https://api-inference.huggingface.co/models/facebook/bart-large-mnli";
+const SUM_URL =
+  "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
 
 export const handleOutcomePredict: RequestHandler = async (req, res) => {
   try {
@@ -13,7 +15,9 @@ export const handleOutcomePredict: RequestHandler = async (req, res) => {
 
     const { text } = req.body as { text?: string };
     if (!text || typeof text !== "string" || text.trim().length < 20) {
-      res.status(400).json({ error: "Please provide case details (min 20 characters)." });
+      res
+        .status(400)
+        .json({ error: "Please provide case details (min 20 characters)." });
       return;
     }
 
@@ -38,7 +42,9 @@ export const handleOutcomePredict: RequestHandler = async (req, res) => {
 
     if (!clsResp.ok) {
       const body = await safeText(clsResp);
-      res.status(clsResp.status === 503 ? 503 : 502).json({ error: body.slice(0, 500) });
+      res
+        .status(clsResp.status === 503 ? 503 : 502)
+        .json({ error: body.slice(0, 500) });
       return;
     }
 
@@ -50,7 +56,9 @@ export const handleOutcomePredict: RequestHandler = async (req, res) => {
       return;
     }
 
-    const ranked = labels.map((l: string, i: number) => ({ label: l, score: scores[i] || 0 })).sort((a: any, b: any) => b.score - a.score);
+    const ranked = labels
+      .map((l: string, i: number) => ({ label: l, score: scores[i] || 0 }))
+      .sort((a: any, b: any) => b.score - a.score);
     const top = ranked[0];
 
     // Compose brief explanation via summarization model
@@ -63,13 +71,20 @@ export const handleOutcomePredict: RequestHandler = async (req, res) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${hfKey}`,
       },
-      body: JSON.stringify({ inputs: sumInput, parameters: { min_length: 60, max_length: 220 } }),
+      body: JSON.stringify({
+        inputs: sumInput,
+        parameters: { min_length: 60, max_length: 220 },
+      }),
     });
 
     let explanation = "";
     if (sumResp.ok) {
-      const sumData = (await sumResp.json()) as Array<{ summary_text?: string }> | any;
-      explanation = Array.isArray(sumData) ? sumData[0]?.summary_text || "" : sumData?.summary_text || "";
+      const sumData = (await sumResp.json()) as
+        | Array<{ summary_text?: string }>
+        | any;
+      explanation = Array.isArray(sumData)
+        ? sumData[0]?.summary_text || ""
+        : sumData?.summary_text || "";
     } else {
       explanation = `Predicted outcome: ${top.label}. Key factors likely include allegations, strength of evidence, and applicable precedent.`;
     }

@@ -16,15 +16,12 @@ export default function OutcomePredictor() {
   const [caseText, setCaseText] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState<string | null>(null);
-  const [aiResult, setAiResult] = useState<
-    | null
-    | {
-        prediction: string;
-        confidence: number;
-        explanation: string;
-        ranking: { label: string; score: number }[];
-      }
-  >(null);
+  const [aiResult, setAiResult] = useState<null | {
+    prediction: string;
+    confidence: number;
+    explanation: string;
+    ranking: { label: string; score: number }[];
+  }>(null);
 
   const predictWithAI = async () => {
     const payload = caseText.trim();
@@ -62,9 +59,12 @@ export default function OutcomePredictor() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-legal-100 text-legal-800 mb-3">
               <Sparkles className="w-3 h-3" /> AI Outcome Prediction
             </div>
-            <h1 className="text-4xl font-bold text-legal-900">Outcome Predictor</h1>
+            <h1 className="text-4xl font-bold text-legal-900">
+              Outcome Predictor
+            </h1>
             <p className="text-muted-foreground mt-2">
-              Paste case details and get a predicted outcome with confidence and explanation
+              Paste case details and get a predicted outcome with confidence and
+              explanation
             </p>
           </div>
 
@@ -100,18 +100,26 @@ export default function OutcomePredictor() {
                     Clear
                   </Button>
                 </div>
-                {aiError && <p className="text-sm text-destructive">{aiError}</p>}
+                {aiError && (
+                  <p className="text-sm text-destructive">{aiError}</p>
+                )}
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-legal-900">Prediction Result</CardTitle>
-                <CardDescription>Model label, confidence, and explanation</CardDescription>
+                <CardTitle className="text-legal-900">
+                  Prediction Result
+                </CardTitle>
+                <CardDescription>
+                  Model label, confidence, and explanation
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 {!aiResult && !aiLoading ? (
-                  <div className="text-muted-foreground">No prediction yet.</div>
+                  <div className="text-muted-foreground">
+                    No prediction yet.
+                  </div>
                 ) : aiLoading ? (
                   <div className="text-muted-foreground">Running model...</div>
                 ) : (
@@ -126,7 +134,9 @@ export default function OutcomePredictor() {
                       {aiResult!.explanation}
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-legal-800 mb-1">Scores</div>
+                      <div className="text-sm font-medium text-legal-800 mb-1">
+                        Scores
+                      </div>
                       <div className="grid grid-cols-2 gap-y-1">
                         {aiResult!.ranking.map((r) => (
                           <div key={r.label} className="flex justify-between">
