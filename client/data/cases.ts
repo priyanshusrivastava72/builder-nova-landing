@@ -106,4 +106,148 @@ export const CASES: CaseDoc[] = [
     fullText:
       "Alpha underreported streaming metrics reducing royalty payments to Nova. The court enforced the audit clause, finding clear underpayment and awarding back royalties plus interest.",
   },
+  {
+    id: "c9",
+    title: "United States v. Greenfield",
+    court: "Supreme Court",
+    year: 2015,
+    tags: ["criminal", "fourth amendment", "privacy"],
+    outcome: "defendant",
+    summary:
+      "Digital privacy protections extended; warrantless cell phone search deemed unconstitutional.",
+    fullText:
+      "Law enforcement searched a suspect's cell phone incident to arrest without a warrant. The court held that digital data requires heightened privacy protections and a warrant was required, leading to suppression of evidence.",
+  },
+  {
+    id: "c10",
+    title: "Horizon Foods v. Metro Logistics",
+    court: "Court of Appeal",
+    year: 2022,
+    tags: ["contract", "force majeure", "covid-19"],
+    outcome: "defendant",
+    summary:
+      "Force majeure clause excused non-performance where pandemic-related shutdowns made delivery impossible.",
+    fullText:
+      "Due to government-ordered shutdowns, Metro Logistics failed to deliver per schedule. The appellate court found the force majeure clause unambiguously covered pandemic-related disruptions, excusing performance.",
+  },
+  {
+    id: "c11",
+    title: "Everest Bank v. Patel",
+    court: "High Court",
+    year: 2019,
+    tags: ["banking", "guarantee", "surety"],
+    outcome: "plaintiff",
+    summary:
+      "Personal guarantee enforced; lender complied with notice provisions and mitigation duties.",
+    fullText:
+      "The borrower defaulted and the bank sought recovery from the guarantor. The court enforced the guarantee, finding no waiver and adequate notice prior to acceleration.",
+  },
+  {
+    id: "c12",
+    title: "EcoWatch v. State Mining Authority",
+    court: "Environmental Court",
+    year: 2021,
+    tags: ["environment", "epa", "injunction"],
+    outcome: "plaintiff",
+    summary:
+      "Preliminary injunction issued for failure to conduct environmental impact assessment.",
+    fullText:
+      "The agency approved mining permits without a full EIA. The court granted an injunction pending proper assessment, citing likely irreparable harm to wetlands and species.",
+  },
+  {
+    id: "c13",
+    title: "BrightApps v. QuantumSoft",
+    court: "Commercial Court",
+    year: 2024,
+    tags: ["ip", "copyright", "injunction"],
+    outcome: "plaintiff",
+    summary:
+      "Copyright infringement found where substantially similar UI and code structure were copied.",
+    fullText:
+      "Expert analysis showed non-trivial copying of expressive elements and code structure. The court issued an injunction and awarded statutory damages.",
+  },
+  {
+    id: "c14",
+    title: "Parker v. Sunset Estates",
+    court: "District Court",
+    year: 2018,
+    tags: ["real estate", "landlord-tenant", "habitability"],
+    outcome: "plaintiff",
+    summary:
+      "Breach of warranty of habitability for persistent mold and lack of heat.",
+    fullText:
+      "Tenant documented repeated requests to remediate mold and repair heating. The court found material breach and awarded abatements and fees.",
+  },
+  {
+    id: "c15",
+    title: "Atlas Pharma v. Zenith Labs",
+    court: "Patent Court",
+    year: 2020,
+    tags: ["ip", "patent", "invalidity"],
+    outcome: "defendant",
+    summary:
+      "Patent invalidated for obviousness in light of prior art combination.",
+    fullText:
+      "The asserted claims were rendered obvious by a combination of two prior publications teaching the same mechanism. The court found a motivation to combine and reasonable expectation of success.",
+  },
+  {
+    id: "c16",
+    title: "People v. Ortiz",
+    court: "Criminal Court",
+    year: 2017,
+    tags: ["criminal", "due process", "lineup"],
+    outcome: "defendant",
+    summary:
+      "Conviction reversed due to unduly suggestive lineup identification procedures.",
+    fullText:
+      "A single-photo identification and comments by officers tainted the identification. The court held the procedure violated due process and remanded for new trial.",
+  },
+  {
+    id: "c17",
+    title: "WestCo v. FairTrade Council",
+    court: "Supreme Court",
+    year: 2016,
+    tags: ["antitrust", "competition", "market power"],
+    outcome: "defendant",
+    summary:
+      "Sherman Act claim failed where plaintiff did not establish relevant market or power.",
+    fullText:
+      "Allegations of exclusionary conduct were insufficient absent a properly defined market and evidence of durable market power. Summary judgment for defendant was affirmed.",
+  },
+  {
+    id: "c18",
+    title: "Garcia v. City Health",
+    court: "Court of Appeal",
+    year: 2023,
+    tags: ["employment", "whistleblower", "retaliation"],
+    outcome: "plaintiff",
+    summary:
+      "Whistleblower retaliation claim succeeded; temporal proximity and pretext evidence carried the day.",
+    fullText:
+      "Plaintiff reported unsafe practices and was terminated weeks later. Employer's shifting explanations supported pretext; jury verdict for plaintiff reinstated.",
+  },
+  {
+    id: "c19",
+    title: "In re BlueSky Aviation",
+    court: "Bankruptcy Court",
+    year: 2022,
+    tags: ["bankruptcy", "preference", "avoidance"],
+    outcome: "plaintiff",
+    summary:
+      "Trustee avoided preferential transfers made within 90 days before filing.",
+    fullText:
+      "Payments to an insider creditor during the preference period were avoidable. The court rejected ordinary course defenses based on unusual collection pressure.",
+  },
+  {
+    id: "c20",
+    title: "Lopez v. Lopez",
+    court: "Family Court",
+    year: 2019,
+    tags: ["family", "custody", "best interests"],
+    outcome: "settled",
+    summary:
+      "Custody dispute resolved via parenting plan focusing on best interests and stability.",
+    fullText:
+      "Parties agreed to joint legal custody with a structured schedule and mediation clause. The agreement emphasized continuity of schooling and healthcare.",
+  },
 ];
