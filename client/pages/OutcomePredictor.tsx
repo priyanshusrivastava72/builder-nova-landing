@@ -17,6 +17,77 @@ function sigmoid(x: number) {
   return 1 / (1 + Math.exp(-x));
 }
 
+const PRESETS: { label: string; values: {
+  claimType: "contract" | "tort" | "criminal" | "employment" | "ip";
+  jurisdiction: "federal" | "state";
+  amount: number;
+  representation: "plaintiff" | "defendant";
+  precedentStrength: number;
+  evidenceQuality: number;
+  judgeStrictness: number;
+} }[] = [
+  {
+    label: "Contract Dispute (Federal)",
+    values: {
+      claimType: "contract",
+      jurisdiction: "federal",
+      amount: 250000,
+      representation: "plaintiff",
+      precedentStrength: 4,
+      evidenceQuality: 4,
+      judgeStrictness: 2,
+    },
+  },
+  {
+    label: "Employment – Wrongful Termination",
+    values: {
+      claimType: "employment",
+      jurisdiction: "state",
+      amount: 80000,
+      representation: "plaintiff",
+      precedentStrength: 3,
+      evidenceQuality: 3,
+      judgeStrictness: 3,
+    },
+  },
+  {
+    label: "Criminal Defense",
+    values: {
+      claimType: "criminal",
+      jurisdiction: "state",
+      amount: 0,
+      representation: "defendant",
+      precedentStrength: 2,
+      evidenceQuality: 2,
+      judgeStrictness: 4,
+    },
+  },
+  {
+    label: "IP – Patent Infringement",
+    values: {
+      claimType: "ip",
+      jurisdiction: "federal",
+      amount: 1500000,
+      representation: "plaintiff",
+      precedentStrength: 3,
+      evidenceQuality: 4,
+      judgeStrictness: 3,
+    },
+  },
+  {
+    label: "Tort – Personal Injury",
+    values: {
+      claimType: "tort",
+      jurisdiction: "state",
+      amount: 120000,
+      representation: "plaintiff",
+      precedentStrength: 2,
+      evidenceQuality: 4,
+      judgeStrictness: 2,
+    },
+  },
+];
+
 export default function OutcomePredictor() {
   const [values, setValues] = useState({
     claimType: "contract",
@@ -110,6 +181,20 @@ export default function OutcomePredictor() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div>
+                  <div className="text-sm font-medium text-legal-800 mb-2">Quick Scenarios</div>
+                  <div className="flex flex-wrap gap-2">
+                    {PRESETS.map((p) => (
+                      <Button
+                        key={p.label}
+                        variant="outline"
+                        onClick={() => setValues(p.values)}
+                      >
+                        {p.label}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <Label>Claim Type</Label>
