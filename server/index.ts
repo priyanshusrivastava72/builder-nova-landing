@@ -24,5 +24,8 @@ export function createServer() {
   // AI assistant route
   app.post("/api/assistant/chat", handleAssistantChat);
 
+  // Summarizer route
+  app.post("/api/summarize", handleSummarize);
+
   return app;
 }
