@@ -27,6 +27,7 @@ import Layout from "@/components/Layout";
 export default function LegalSummarizer() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+  const [text, setText] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -136,7 +137,25 @@ export default function LegalSummarizer() {
                     id="text"
                     placeholder="Paste your legal document text here..."
                     className="min-h-[200px] resize-none"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
                   />
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() =>
+                        setText(
+                          "In the matter of Doe v. City Transit, the plaintiff alleges negligence arising from a bus accident on January 12, 2021. Plaintiff contends the driver breached the standard of care by speeding and failing to maintain a proper lookout. The City denies liability and asserts comparative negligence, alleging plaintiff failed to wear a seatbelt and ignored safety instructions. The trial court considered expert testimony on stopping distance and maintenance records for the vehicle. On summary judgment, the court held genuine disputes of material fact existed as to breach and causation, and set the matter for trial. The court also addressed the admissibility of certain hearsay statements under the excited utterance exception and ruled on motions in limine regarding prior incidents."
+                        )
+                      }
+                    >
+                      Load Example Judgment
+                    </Button>
+                    <Button type="button" variant="outline" onClick={() => setText("")}>
+                      Clear
+                    </Button>
+                  </div>
                 </div>
 
                 {/* Settings */}
